@@ -6,6 +6,9 @@ import { NavbarBrand } from 'bloomer/lib/components/Navbar/NavbarBrand';
 import { NavbarItem } from 'bloomer/lib/components/Navbar/NavbarItem';
 import { NavbarMenu } from 'bloomer/lib/components/Navbar/NavbarMenu';
 import { NavbarEnd } from 'bloomer/lib/components/Navbar/NavbarEnd';
+import { Columns } from 'bloomer/lib/grid/Columns';
+import { Column } from 'bloomer/lib/grid/Column';
+import { Button } from 'bloomer/lib/elements/Button';
 
 class App extends Component {
   render() {
@@ -34,6 +37,25 @@ class App extends Component {
             </NavbarEnd>
           </NavbarMenu>
         </Navbar>
+        <Columns>
+          <Column isSize = {{desktop: 6, tablet: 8, mobile: 10}} isOffset = {{desktop: 3, tablet: 2, mobile:1}}>
+            <span className = "landing-page-heading">A Trip Optimiser</span>
+          </Column>
+        </Columns>
+        <Columns>
+          <Column isSize = {{desktop: 8, tablet: 10, mobile: 10}} isOffset = {{desktop: 2, tablet: 1, mobile:1}}>
+            <span className = "landing-page-content">Planning a trip has never been easier before.
+              <br></br>
+                  When to leave, how to leave, what all to take when you leave, we got you all covered.
+            </span>
+          </Column>
+        </Columns>
+        <Columns>
+          <Column isSize = {{desktop: 4, tablet: 6, mobile: 8}} isOffset = {{desktop: 4, tablet: 3, mobile:2}}>
+            <Button className = "landing-page-btn">Login</Button>
+            <Button className = "landing-page-btn">SignUp</Button>
+          </Column>
+        </Columns>
       </div>
     );
   }

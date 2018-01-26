@@ -30,6 +30,41 @@
   display: flex;
 }
 
+.landing-page-heading {
+  font-family: 'caviar_dreamsregular';
+  color: #DADADA;
+  font-size: 72px; 
+}
+
+.landing-page-content {
+  font-family: 'avenir-book';
+  font-size: 25px;
+  color: #ffffff;
+}
+
+.landing-page-btn {
+  color: #ffffff;
+  background: #2EBD6B;
+  border-color: #2EBD6B;
+  min-width: 130px;
+  min-height: 45px;
+  border-radius: 11px;
+  margin: 20px;
+  font-family: 'avenir-book';
+  font-size: 20px;
+}
+
+.landing-page-btn:hover{
+  -webkit-transition: all 250ms ease;
+  -moz-transition: all 250ms ease;
+  -ms-transition: all 250ms ease;
+  -o-transition: all 250ms ease;
+  transition: all 250ms ease;
+  color: #ffffff;
+  background: transparent;
+  border-color: #2EBD6B;
+}
+
 @media (min-width: 1024px) {
   .hidden-links {
     display: none;
@@ -53,6 +88,14 @@
   font-family: 'avenir-book';
   src: url('./fonts/avenir-book.woff2') format('woff2'),
        url('./fonts/avenir-book.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'caviar_dreamsregular';
+  src: url('./fonts/caviardreams-webfont.woff2') format('woff2'),
+       url('./fonts/caviardreams-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
