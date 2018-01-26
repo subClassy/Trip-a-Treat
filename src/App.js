@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {Link} from 'react-router';
 import {Navbar} from 'bloomer';
 import { NavbarBrand } from 'bloomer/lib/components/Navbar/NavbarBrand';
 import { NavbarItem } from 'bloomer/lib/components/Navbar/NavbarItem';
@@ -20,19 +21,19 @@ class App extends Component {
               <img src={logo} className = "navbar-logo" /> <span className = "logo-name">Trip-a-Treat</span>
             </NavbarItem>
             <NavbarItem className = "hidden-links">
-              <span className = "navbar-links">Login</span>
+              <Link to = {'/login'}><span className = "navbar-links">Login</span></Link>
             </NavbarItem>
             <NavbarItem className = "hidden-links">
-              <span className = "navbar-links">SignUp</span>
+              <Link to = {'/login'}><span className = "navbar-links">SignUp</span></Link>
             </NavbarItem>
           </NavbarBrand>
           <NavbarMenu>
             <NavbarEnd>
               <NavbarItem>
-                <span className = "navbar-links">Login</span>
+                <Link to = {'/login'}><span className = "navbar-links">Login</span></Link>
               </NavbarItem>
               <NavbarItem>
-                <span className = "navbar-links">SignUp</span>
+                <Link to = {'/login'}><span className = "navbar-links">SignUp</span></Link>
               </NavbarItem>
             </NavbarEnd>
           </NavbarMenu>
@@ -52,8 +53,8 @@ class App extends Component {
         </Columns>
         <Columns>
           <Column isSize = {{desktop: 4, tablet: 6, mobile: 8}} isOffset = {{desktop: 4, tablet: 3, mobile:2}}>
-            <Button className = "landing-page-btn">Login</Button>
-            <Button className = "landing-page-btn">SignUp</Button>
+            <Link to = {'/login'}><Button className = "landing-page-btn">Login</Button></Link>
+            <Link to = {'/login'}><Button className = "landing-page-btn">SignUp</Button></Link>
           </Column>
         </Columns>
       </div>

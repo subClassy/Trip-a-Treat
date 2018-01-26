@@ -65,6 +65,88 @@
   border-color: #2EBD6B;
 }
 
+.login-logo {
+  margin: 0 auto;
+  min-width: 130.83px;
+  max-width: 130.83px;
+  display: table;
+  margin-top: 20px
+}
+
+.login-box {
+  background-color: #070020;
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+}
+
+.tabs {
+  font-family: 'avenir-book';
+  font-size: 24px;
+  color: #DADADA;
+}
+
+.tabs-login {
+  float: right;
+}
+
+.tabs-signup {
+  float: left;
+}
+
+.label {
+  font-size: 1.2em;
+  color: #fff;
+  margin: 0 0 .5em;
+  padding: 0;
+  float: left;
+}
+
+.email-input, .password-input{
+  outline: none;
+  font-size: 1.2em;
+  color: #e8e8e8;
+  padding: 1.3em 1em;
+  margin: auto;
+  border: none;
+  -webkit-appearance: none;
+  display: block;
+  background: #256a71;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px; 
+-o-border-radius: 3px;
+-ms-border-radius: 3px;
+  border-radius: 3px; 
+  font-family: 'Athiti', sans-serif;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.signin-btn {
+  font-size: 1.4em;
+  color: #fff;
+  background: #e89406;
+  border: 3px solid #e89406;
+  outline: none;
+  cursor: pointer;
+  padding: .3em 1em;
+  -webkit-appearance: none;
+  width: 100%;
+  -webkit-border-radius: 3px;
+-moz-border-radius: 3px; 
+-o-border-radius: 3px;
+-ms-border-radius: 3px;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+.alt-signin {
+  text-align: center;
+  font-size: 1.2em;
+  color: #fff;
+  margin-top: -10px;
+  padding: 0;
+  margin-bottom: 12px;
+}
+
 @media (min-width: 1024px) {
   .hidden-links {
     display: none;
