@@ -2,27 +2,57 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.navbar {
+  padding-top: 5px;
+  padding-right: 20px;
+  background: linear-gradient(to bottom, #070020, #080a27);
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.navbar-logo {
+  margin-right: 5px;
+  width: 200px;
+  min-height: 109px;
 }
 
-.App-title {
-  font-size: 1.5em;
+.logo-name {
+  font-family: 'heading_smallcase_pro_trialTh';
+  font-size: 60px;
+  color: #DADADA;
 }
 
-.App-intro {
-  font-size: large;
+.navbar-links {
+  font-family: 'avenir-book';
+  font-size: 25px;
+  color: #ffffff;
+}
+
+.hidden-links {
+  display: flex;
+}
+
+@media (min-width: 1024px) {
+  .hidden-links {
+    display: none;
+  }
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@font-face {
+  font-family: 'heading_smallcase_pro_trialTh';
+  src: url('./fonts/heading-pro-smallcase-thin-trial-webfont.woff2') format('woff2'),
+       url('./fonts/heading-pro-smallcase-thin-trial-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'avenir-book';
+  src: url('./fonts/avenir-book.woff2') format('woff2'),
+       url('./fonts/avenir-book.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
