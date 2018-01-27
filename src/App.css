@@ -200,6 +200,31 @@
   font-size: 32px;
 }
 
+.profile-nav {
+  margin-right: 80px;
+}
+
+.heading-profile {
+  text-align: center;
+  font-family: 'avenir-book';
+  font-size: 23px;
+  color: #ffffff;
+}
+
+.profile-labels {
+  font-family: 'avenir-book';
+  font-size: 22px;
+  color: #F1F1F1;
+  margin: 5px;
+}
+
+.profile-inputs {
+  font-family: 'avenir-book';
+  font-size: 22px;
+  color: #070221;
+  margin: 5px;
+}
+
 #outer-container {
   height: 100vh;
 }
