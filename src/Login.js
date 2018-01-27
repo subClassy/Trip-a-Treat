@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {Link} from 'react-router';
+import './bootstrap-social.css';
 import { Columns } from 'bloomer/lib/grid/Columns';
 import { Column } from 'bloomer/lib/grid/Column';
 import { Box } from 'bloomer/lib/elements/Box';
@@ -37,7 +39,7 @@ class Login extends Component {
             <div>
                 <Columns>
                     <Column isSize = {{desktop: 4, tablet: 4, mobile: 6}} isOffset = {{desktop: 4, tablet: 4, mobile:3}}>
-                        <img src={logo} className = "login-logo" />
+                        <Link to = {'/app'} ><img src={logo} className = "login-logo" /></Link>
                     </Column>
                 </Columns>
                 <Columns>
@@ -54,10 +56,10 @@ class Login extends Component {
                             {
                                 (this.state.isLogin === true) ?
                                     <div className = "form-group">
-                                        <Label className = "label">Email</Label>
+                                        <Label className = "label">Username</Label>
                                         <input
-                                        className = "form-control email-input"
-                                        type = "text"
+                                            className = "form-control email-input"
+                                            type = "text"
                                         />
                                         <Label className = "label">Password</Label>
                                         <input
@@ -69,7 +71,7 @@ class Login extends Component {
                                             type = "button"
                                             // onClick = {() => this.signIn()}
                                         >
-                                            SIGN IN
+                                            Login
                                         </button>
                                         <hr /> 
                                         <p className = "alt-signin"> Sign In Using : </p>
@@ -78,24 +80,65 @@ class Login extends Component {
                                                 className = "btn btn-google oAuth-btn"
                                                 type = "button"
                                                 onClick = {() => this.handleGoogleLogin()}
-                                                style = {{marginLeft: '5px'}}
                                             >
-                                                <i className="fa fa-google" aria-hidden="true" style = {{marginRight: '5px'}}></i>
+                                                <i className="fa fa-google" aria-hidden="true"></i>
                                                 Google
                                             </button>
                                             <button
                                                 className = "btn btn-facebook oAuth-btn"
                                                 type = "button"
                                                 onClick = {() => this.handleFacebookLogin()}
-                                                style = {{marginLeft: '5px'}}
                                             >
-                                                <i className="fa fa-facebook" aria-hidden="true" style = {{marginRight: '5px'}}></i>
+                                                <i className="fa fa-facebook" aria-hidden="true"></i>
                                                 Facebook
                                             </button>
                                         </div>
                                     </div>
                                 :
-                                <div>hello</div>
+                                <div className = "form-group">
+                                        <Label className = "label">Email</Label>
+                                        <input
+                                            className = "form-control email-input"
+                                            type = "text"
+                                        />
+                                        <Label className = "label">Username</Label>
+                                        <input
+                                            className = "form-control email-input"
+                                            type = "text"
+                                        />
+                                        <Label className = "label">Password</Label>
+                                        <input
+                                            className = "form-control password-input"
+                                            type = "password"
+                                        />
+                                        <button
+                                            className = "btn signin-btn"
+                                            type = "button"
+                                            // onClick = {() => this.signIn()}
+                                        >
+                                            SignUp
+                                        </button>
+                                        <hr /> 
+                                        <p className = "alt-signin"> Sign Up Using : </p>
+                                        <div className = "oAuth-btns">
+                                            <button
+                                                className = "btn btn-google oAuth-btn"
+                                                type = "button"
+                                                onClick = {() => this.handleGoogleLogin()}
+                                            >
+                                                <i className="fa fa-google" aria-hidden="true"></i>
+                                                Google
+                                            </button>
+                                            <button
+                                                className = "btn btn-facebook oAuth-btn"
+                                                type = "button"
+                                                onClick = {() => this.handleFacebookLogin()}
+                                            >
+                                                <i className="fa fa-facebook" aria-hidden="true"></i>
+                                                Facebook
+                                            </button>
+                                        </div>
+                                    </div>
                             }
                         </Box>
                     </Column>

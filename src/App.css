@@ -74,7 +74,7 @@
 }
 
 .login-box {
-  background-color: #070020;
+  background-color: #0700204d;
   box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
 }
 
@@ -93,49 +93,53 @@
 }
 
 .label {
-  font-size: 1.2em;
-  color: #fff;
-  margin: 0 0 .5em;
-  padding: 0;
-  float: left;
+  font-size: 20px;
+  font-family: 'avenir-book';
+  color: #DADADA;
 }
 
 .email-input, .password-input{
   outline: none;
-  font-size: 1.2em;
-  color: #e8e8e8;
-  padding: 1.3em 1em;
+  font-size: 25px;
   margin: auto;
   border: none;
-  -webkit-appearance: none;
   display: block;
-  background: #256a71;
--webkit-border-radius: 3px;
--moz-border-radius: 3px; 
--o-border-radius: 3px;
--ms-border-radius: 3px;
-  border-radius: 3px; 
-  font-family: 'Athiti', sans-serif;
+  background: transparent;
+  border-bottom: 1px solid #95989A;
+  font-family: 'avenir-book';
   margin-top: 4px;
   margin-bottom: 4px;
 }
 
+.oAuth-btns {
+  display: flex;
+}
+
+.oAuth-btn {
+  min-height: 35px;
+  min-width: 120px;
+  display: table;
+  margin: 0 auto;
+}
+
 .signin-btn {
+  margin: 0 auto;
+  display: table;
+  padding: 5.5px;
+  font-family: 'avenir-book';
+  margin-top: 35px;
   font-size: 1.4em;
   color: #fff;
-  background: #e89406;
-  border: 3px solid #e89406;
+  background: #2EBD6B;
+  border: 1px solid #2EBD6B;
   outline: none;
   cursor: pointer;
-  padding: .3em 1em;
-  -webkit-appearance: none;
-  width: 100%;
-  -webkit-border-radius: 3px;
--moz-border-radius: 3px; 
--o-border-radius: 3px;
--ms-border-radius: 3px;
-  border-radius: 3px;
-  margin-top: 10px;
+  width: 50%;
+  -webkit-border-radius: 11px;
+-moz-border-radius: 11px; 
+-o-border-radius: 11px;
+-ms-border-radius: 11px;
+  border-radius: 11px;
 }
 
 .alt-signin {
