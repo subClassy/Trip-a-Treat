@@ -22,6 +22,7 @@ import { Button } from 'bloomer/lib/elements/Button';
 import axios from 'axios';
 import { Link } from 'react-router';
 import {hashHistory} from 'react-router';
+import { Image } from 'bloomer/lib/elements/Image';
 
 class Profile extends Component {
     constructor(props) {
@@ -327,6 +328,7 @@ class Profile extends Component {
                 <Navbar className = "navbar">
                     <NavbarBrand>
                     <Columns isCentered>
+                    
                         <NavbarItem style={{marginLeft:10+ 'em'}}>
                             <img src={logo} className = "navbar-logo"/><span className = "logo-name">Trip-a-Treat</span>
                         </NavbarItem>
@@ -353,6 +355,7 @@ class Profile extends Component {
                         </NavbarEnd>
                     </NavbarMenu>
                 </Navbar>
+                <Columns isCentered><Column isCentered><Image style={{marginLeft:44+ 'em'}} isSize="128x128" src="https://www.gvsu.edu/cms4/asset/2BD867CE-07AE-8DD2-1022D33D00143BB8/icon_emergency1.png" /></Column></Columns>
                 <Columns>
                     <Column isSize = {{desktop: 6, tablet: 8, mobile: 10}} isOffset = {{desktop: 3, tablet: 2, mobile: 1}}>
                         <p className = "heading-profile">Lets plan your next trip</p>
