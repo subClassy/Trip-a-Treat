@@ -12,6 +12,8 @@ import './App.css';
 import logo from './logo.svg';
 import {firebaseApp} from './firebase';
 import axios from 'axios';
+import { Container } from 'bloomer/lib/layout/Container';
+
 
 
 class Display extends Component {
@@ -118,8 +120,11 @@ class Display extends Component {
                         </NavbarEnd>
                     </NavbarMenu>
                 </Navbar>
+                <Columns style={{marginLeft:23+ 'em'}}>
+                <p className = "profile-labels" hasTextAlign='centered'>Your most optimum path is shown and You must depart at {time} on {json.data[0].date}.</p>
+                </Columns>
                 <Columns>
-                    <Column isSize = {{default: 8}} isOffset = {{default: 2}}>
+                    <Column isSize = {{default: 9}} isOffset = {{default: 3}}>
                     <MyMapComponent
                         isMarkerShown
                         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
@@ -128,34 +133,36 @@ class Display extends Component {
                         mapElement={<div style={{ height: `100%` }} />}
                     />
                     </Column>
+                </Columns>
+                <Container>
+                <Columns>
                     <Column>
-                    <p className = "profile-labels">Alternative Routes</p><br />
+                    <p className = "profile-labels">Alternative Routes:
                     {json.data.map((currentRoute, k) => {
                         return (
                             <div>
                             {
-                                (k !== 0) ? <p className = "profile-labels">{k}) Via {json.data[k].summary}. Distance - {json.data[k].legs[0].distance.text}. Time - {json.data[k].legs[0].duration.text}</p> : <p></p>
+                                (k !== 0) ? <p className = "profile-labels" style={{marginLeft:10+ 'em'}}>{k}) Via {json.data[k].summary}. Distance - {json.data[k].legs[0].distance.text}. Time - {json.data[k].legs[0].duration.text}</p> : <p></p>
                             }
                             </div>
                         )
                     })}
+                    </p>
                     </Column>
                 </Columns>
                 <Columns>
-                    <Column isSize = {{default: 8}} isOffset = {{default: 2}}>
-                        <p className = "profile-labels"> You must depart at {time} on {json.data[0].date}.</p>
-                    </Column>
-                </Columns>
-                <Columns>
-                    <Column isSize = {{default: 8}} isOffset = {{default: 2}}>
+
+                    <Column>
                         <p className = "profile-labels">Expected weather should be {json.data[0].weather}.</p>
+
                     </Column>
                 </Columns>
                 <Columns>
-                    <Column isSize = {{default: 8}} isOffset = {{default: 2}}>
+                    <Column>
                         <p className = "profile-labels">On this route you will be mostly travelling on {json.data[0].summary}</p>
                     </Column>
                 </Columns>
+                </Container>
             </div>
             </div>
         )

@@ -27,6 +27,7 @@ class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isLoading: false,
             date: moment(),
             formattedDate: '',
             placeOrigin: '',
@@ -96,6 +97,10 @@ class Profile extends Component {
     submitForm(e){
         e.preventDefault();
 
+        this.setState({
+            isLoading: true,
+        });
+        
         if(this.state.placeOrigin === '' || this.state.placeDest === '') {
             alert("Please fill up all the fields");
             return;
@@ -326,13 +331,13 @@ class Profile extends Component {
                             <img src={logo} className = "navbar-logo"/><span className = "logo-name">Trip-a-Treat</span>
                         </NavbarItem>
                     <Column isSize="1/4">
-                        <NavbarItem className = "hidden-links">
-                            <span className = "navbar-links" hasTextAlign='centered'>Hello, </span>
+                        <NavbarItem className = "hidden-links" hasTextAlign='centered'>
+                            <span className = "navbar-links">Hello,</span>
                         </NavbarItem>
                     </Column>
                     <Column isSize="1/3">
-                        <NavbarItem className = "hidden-links">
-                            <span className = "navbar-links" hasTextAlign='centered'>No Name</span>
+                        <NavbarItem className = "hidden-links" hasTextAlign='centered'>
+                            <span className = "navbar-links">No Name</span>
                         </NavbarItem>
                     </Column>
                     </Columns>
@@ -409,8 +414,8 @@ class Profile extends Component {
                     </Column>
                 </Columns>
                 <Columns>
-                    <Column isSize = {{desktop: 3, tablet: 4, mobile:5}} isOffset = {{desktop: 1, tablet: 2, mobile: 1}}>
-                        <Button className = "profile-submit" onClick = {this.submitForm}>Submit</Button>
+                    <Column isSize = {{desktop: 6, tablet: 4, mobile:5}} isOffset = {{desktop: 5, tablet: 2, mobile: 1}}>
+                        <Button className = "profile-submit" onClick = {this.submitForm} isLoading={this.state.isLoading} >Submit</Button>
                     </Column>
                 </Columns>
             </div>

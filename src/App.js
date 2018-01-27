@@ -16,27 +16,13 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar className = "navbar">
+        <Columns isCentered>
           <NavbarBrand>
-            <NavbarItem>
+            <NavbarItem style={{marginLeft:10+ 'em'}}>
               <img src={logo} className = "navbar-logo" /> <span className = "logo-name">Trip-a-Treat</span>
             </NavbarItem>
-            <NavbarItem className = "hidden-links">
-              <Link to = {'/login'}><span className = "navbar-links">Login</span></Link>
-            </NavbarItem>
-            <NavbarItem className = "hidden-links">
-              <Link to = {'/login'}><span className = "navbar-links">SignUp</span></Link>
-            </NavbarItem>
-          </NavbarBrand>
-          <NavbarMenu>
-            <NavbarEnd>
-              <NavbarItem>
-                <Link to = {'/login'}><span className = "navbar-links">Login</span></Link>
-              </NavbarItem>
-              <NavbarItem>
-                <Link to = {'/login'}><span className = "navbar-links">SignUp</span></Link>
-              </NavbarItem>
-            </NavbarEnd>
-          </NavbarMenu>
+            </NavbarBrand>
+        </Columns>
         </Navbar>
         <Columns>
           <Column isSize = {{desktop: 6, tablet: 8, mobile: 10}} isOffset = {{desktop: 3, tablet: 2, mobile:1}}>
