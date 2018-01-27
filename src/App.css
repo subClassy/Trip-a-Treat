@@ -225,6 +225,13 @@
   margin: 5px;
 }
 
+.profile-submit {
+  color: #F1F1F1;
+  background-color: #2EBD6B;
+  border-radius: 10px;
+  border-color: #2EBD6B;
+}
+
 #outer-container {
   height: 100vh;
 }

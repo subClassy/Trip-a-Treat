@@ -18,6 +18,8 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import { Field } from 'bloomer/lib/elements/Form/Field/Field';
 import { Control } from 'bloomer/lib/elements/Form/Control';
 import { Select } from 'bloomer/lib/elements/Form/Select';
+import { Button } from 'bloomer/lib/elements/Button';
+import axios from 'axios';
 
 class Profile extends Component {
     constructor(props) {
@@ -25,7 +27,8 @@ class Profile extends Component {
         this.state = {
             date: moment(),
             formattedDate: '',
-            place: '',
+            placeOrigin: '',
+            placeDest: '',
             latlngOrigin: null,
             latlngDest: null,
             time: 'morning',
@@ -33,7 +36,11 @@ class Profile extends Component {
         }
         this.handleDate = this.handleDate.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
-        this.onChange = (place) => this.setState({ place })
+        this.handleSelectPriorities = this.handleSelectPriorities.bind(this);
+        this.submitForm = this.submitForm.bind(this);
+        this.onChangeOrigin = (placeOrigin) => this.setState({ placeOrigin });
+        this.onChangeDest = (placeDest) => this.setState({ placeDest });
+
     }
 
     signOut() {
@@ -50,7 +57,10 @@ class Profile extends Component {
 
     handleSelectPriorities(e) {
         e.preventDefault();
-        const element = e.target.value;
+        var element = e.target.value;
+        if (element === 'None'){
+            element = '';
+        }
         this.setState({
             priority: element
         })
@@ -75,17 +85,195 @@ class Profile extends Component {
             var year = moment.getFullYear();
             year = year.toString();
             var formattedDate = date + '-' + month + '-' + year;
-            console.log(formattedDate);
+            this.setState({
+                formattedDate: formattedDate
+            })
         });
     }
 
-    render() {
-        const inputProps = {
-            value: this.state.place,
-            onChange: this.onChange,
-            placeholder: 'Enter Location',
+    submitForm(e){
+        e.preventDefault();
+
+        if(this.state.placeOrigin === '' || this.state.placeDest === '') {
+            alert("Please fill up all the fields");
+            return;
         }
 
+        if(this.state.formattedDate === '') {
+            this.setState({
+                date: moment(new Date()),
+            }, () => {
+                var moment = this.state.date._d;
+                var date = moment.getDate();
+                date = date.toString();
+                if (date.length === 1) {
+                    date = "0" + date;
+                }
+                var month = moment.getMonth() + 1;
+                month = month.toString();
+                if (month.length === 1) {
+                    month = "0" + month;
+                }
+                var year = moment.getFullYear();
+                year = year.toString();
+                var formattedDate = date + '-' + month + '-' + year;
+                this.setState({
+                    formattedDate: formattedDate
+                }, () => {
+                    geocodeByAddress(this.state.placeOrigin)
+                    .then(results => getLatLng(results[0]))
+                    .then(latlngOrigin => {
+                        this.setState({
+                            latlngOrigin: latlngOrigin
+                        }, () => {
+                            var data = {
+                                formattedDate: this.state.formattedDate,
+                                time: this.state.time,
+                                latitude: this.state.latlngOrigin.lat,
+                                longitude: this.state.latlngOrigin.lng,
+                                source: this.state.placeOrigin,
+                                destination: this.state.placeDest,
+                                priority: this.state.priority
+                            }
+                            console.log(data);
+                    
+                            axios.post('https://6db5e2b4.ngrok.io/trips', {
+                                data: data
+                              }, {headers: {
+                                  'Content-Type': 'application/json'
+                              }})
+                              .then(function (response) {
+                                console.log(response);
+                              })
+                              .catch(function (error) {
+                                console.log(error);
+                              });
+    
+                        })
+                    });
+                })
+            });
+        } else {
+            geocodeByAddress(this.state.placeOrigin)
+            .then(results => getLatLng(results[0]))
+            .then(latlngOrigin => {
+                this.setState({
+                    latlngOrigin: latlngOrigin
+                }, () => {
+                    var data = {
+                        formattedDate: this.state.formattedDate,
+                        time: this.state.time,
+                        latitude: this.state.latlngOrigin.lat,
+                        longitude: this.state.latlngOrigin.lng,
+                        source: this.state.placeOrigin,
+                        destination: this.state.placeDest,
+                        priority: this.state.priority
+                    }
+                    console.log(data);
+            
+                    axios.post('https://6db5e2b4.ngrok.io/trips', {
+                        data: data
+                      }, {headers: {
+                          'Content-Type': 'application/json'
+                      }})
+                      .then(function (response) {
+                        console.log(response);
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+
+                })
+            });
+        }
+
+        
+
+
+
+
+
+
+        // var longitude, latitude;
+        
+        // geocodeByAddress(this.state.placeOrigin)
+        //     .then(results => getLatLng(results[0]))
+        //         .then(latlngOrigin => {
+        //             this.setState({
+        //                 latlngOrigin: latlngOrigin
+        //             }, () => {
+        //                 var data = {
+        //                     formatteDate: this.state.formattedDate,
+        //                     time: this.state.time,
+        //                     latitude: this.state.latlngOrigin.lat,
+        //                     longitude: this.state.latlngOrigin.lng,
+        //                     source: this.state.placeOrigin,
+        //                     destination: this.state.placeDest,
+        //                     priority: this.state.priority
+        //                 }
+                
+        //                 axios.post('http://c122b9ef.ngrok.io/trips', {
+        //                     data: data
+        //                   }, {headers: {
+        //                       'Content-Type': 'application/json'
+        //                   }})
+        //                   .then(function (response) {
+        //                     console.log(response);
+        //                   })
+        //                   .catch(function (error) {
+        //                     console.log(error);
+        //                   });
+        //             })
+        //         });
+        // geocodeByAddress(this.state.placeDest)
+        // .then(results => getLatLng(results[0]))
+        //     .then(latlngDest => {
+        //         this.setState({
+        //             latlngDest: latlngDest
+        //         })
+        //     });
+
+        // if(this.state.formattedDate === '') {
+        //     let today = moment(new Date());
+        //     this.handleDate(today);
+        // }
+        // console.log(this.state.latlngOrigin);
+
+        // var data = {
+        //     formatteDate: this.state.formattedDate,
+        //     time: this.state.time,
+        //     // latitude: this.state.latlngOrigin.lat,
+        //     // longitude: this.state.latlngOrigin.lng,
+        //     source: this.state.placeOrigin,
+        //     destination: this.state.placeDest,
+        //     priority: this.state.priority
+        // }
+
+        // axios.post('http://c122b9ef.ngrok.io', {
+        //     data: data
+        //   }, {headers: {
+        //       'Content-Type': 'application/json'
+        //   }})
+        //   .then(function (response) {
+        //     console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
+        
+    }
+
+    render() {
+        const inputPropsOrigin = {
+            value: this.state.placeOrigin,
+            onChange: this.onChangeOrigin,
+            placeholder: 'Enter Origin Location',
+        }
+        const inputPropsDest = {
+            value: this.state.placeDest,
+            onChange: this.onChangeDest,
+            placeholder: 'Enter Destination Location',
+        }
         const myStyles = {
             root: { 
                 fontSize: '17px' 
@@ -112,17 +300,6 @@ class Profile extends Component {
             },
         }
 
-        const handleEnter = (place) => {
-            geocodeByAddress(place)
-            .then(results => getLatLng(results[0]))
-            .then(latLng => 
-                console.log('Success', latLng),
-                // this.search(latLng)
-            )
-            .catch(error => console.error('Error', error))
-            // console.log("hello");
-            // this.search();
-        }
         return (
             <div id = "outer-container">
                 <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } width = {'400px'} right>
@@ -174,8 +351,7 @@ class Profile extends Component {
                         <p className = "profile-labels"> Where do you plan to begin your journey : </p> <PlacesAutocomplete 
                                 placeholder = 'Enter Location'
                                 styles={myStyles}
-                                inputProps={inputProps} 
-                                onEnterKeyDown={handleEnter}
+                                inputProps={inputPropsOrigin}
                             />
                     </Column>
                 </Columns>
@@ -184,41 +360,43 @@ class Profile extends Component {
                         <p className = "profile-labels"> Where do you plan to end your journey : </p> <PlacesAutocomplete 
                                 placeholder = 'Enter Location'
                                 styles={myStyles}
-                                inputProps={inputProps} 
-                                onEnterKeyDown={handleEnter}
+                                inputProps={inputPropsDest}
                             />
                     </Column>
                 </Columns>
                 <Columns>
-                    <Column isSize = {{desktop: 6, tablet: 8, mobile: 10}} isOffset = {{desktop: 3, tablet: 2, mobile: 1}}>
+                    <Column isSize = {{desktop: 3, tablet: 4, mobile: 5}} isOffset = {{desktop: 3, tablet: 2, mobile: 1}}>
                         <p className = "profile-labels">When do you plan to leave tentatively :</p>
                         <Field>
                             <Control>
                                 <Select onChange = {this.handleSelect}>
-                                    <option >Morning</option>
-                                    <option >Afternoon</option>
-                                    <option >Evening</option>
-                                    <option >Late Night</option>
+                                    <option >morning</option>
+                                    <option >afternoon</option>
+                                    <option >evening</option>
+                                    <option >night</option>
                                 </Select>
                             </Control>
                         </Field>
                     </Column>
-                </Columns>
-                <Columns>
-                    <Column isSize = {{desktop: 6, tablet: 8, mobile: 10}} isOffset = {{desktop: 3, tablet: 2, mobile: 1}}>
+                    <Column isSize = {{desktop: 3, tablet: 4, mobile:5}} >
                         <p className = "profile-labels">Some priorities :</p>
                         <Field>
                             <Control>
                                 <Select onChange = {this.handleSelectPriorities}>
                                     <option >None</option>
-                                    <option >Avoid Highways</option>
-                                    <option >Avoid Tolls</option>
+                                    <option >avoid-highways</option>
+                                    <option >avoid-tolls</option>
                                 </Select>
                             </Control>
                         </Field>
                     </Column>
                 </Columns>
-                </div>
+                <Columns>
+                    <Column isSize = {{default: 2}} isOffset = {{default: 5}}>
+                        <Button className = "profile-submit" onClick = {this.submitForm}>Submit</Button>
+                    </Column>
+                </Columns>
+            </div>
             </div>
         )
     }
