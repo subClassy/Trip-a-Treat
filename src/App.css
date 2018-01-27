@@ -152,6 +152,58 @@
   margin-bottom: 12px;
 }
 
+.bm-burger-button {
+  float: right;
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  right: 36px;
+  top: 36px;
+}
+
+.bm-burger-bars {
+  background: #2EBD6B;
+}
+
+.bm-cross-button {
+  height: 36px;
+  width: 36px;
+}
+
+.bm-cross {
+  background: #2EBD6B;
+}
+
+.bm-menu {
+  background: #070221;
+  padding: 2.5em 2.5em 0;
+  font-size: 1.15em;
+}
+
+.bm-item-list {
+  color: #F1F1F1;
+  padding: 0.8em;
+}
+
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.hm-list {
+  font-family: 'avenir-book';
+  font-size: 25px;
+  color: #F1F1F1;
+}
+
+.hm-logout {
+  color: #C20000;
+  font-size: 32px;
+}
+
+#outer-container {
+  height: 100vh;
+}
+
 @media (min-width: 1024px) {
   .hidden-links {
     display: none;

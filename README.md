@@ -19,5 +19,7 @@ Key tools used in this React project are:
 
 ### Back-end
 
+The source code for the backend is at https://github.com/WickedBrat/Trip-a-Treat
+
 * [Flask]
 * [SQL Alchemy]
