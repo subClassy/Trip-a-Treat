@@ -10,6 +10,7 @@ import { Column } from 'bloomer/lib/grid/Column';
 import { Box } from 'bloomer/lib/elements/Box';
 import { Label } from 'bloomer/lib/elements/Form/Label';
 import axios from 'axios';
+import { hashHistory } from 'react-router';
 
 class Login extends Component {
     constructor(props) {
@@ -55,12 +56,7 @@ class Login extends Component {
             .then((result) => {
                 const user = result.user;
                 const email = user.email;
-                axios.post("https://a62c40c4.ngrok.io/login", {
-                    "viaOauth": true,
-                    "email": email
-                }).then(response => {
-                    localStorage.setItem('userId', response.userId)
-                })
+                console.log(firebase.auth().currentUser.email);
                 this.setState({
                     user
             });

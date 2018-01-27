@@ -23,6 +23,7 @@ import axios from 'axios';
 import { Link } from 'react-router';
 import {hashHistory} from 'react-router';
 import { Image } from 'bloomer/lib/elements/Image';
+import firebase from 'firebase';
 
 class Profile extends Component {
     constructor(props) {
@@ -45,6 +46,10 @@ class Profile extends Component {
         this.onChangeOrigin = (placeOrigin) => this.setState({ placeOrigin });
         this.onChangeDest = (placeDest) => this.setState({ placeDest });
 
+    }
+
+    componentDidMount() {
+        
     }
 
     signOut() {
@@ -292,6 +297,10 @@ class Profile extends Component {
             onChange: this.onChangeDest,
             placeholder: 'Enter Destination Location',
         }
+        // let username = firebase.auth().currentUser.toArray();
+        // console.log(username);
+        // username = username.currentUser.displayName;
+
         const myStyles = {
             root: { 
                 fontSize: '17px' 
@@ -332,14 +341,16 @@ class Profile extends Component {
                         <NavbarItem style={{marginLeft:10+ 'em'}}>
                             <img src={logo} className = "navbar-logo"/><span className = "logo-name">Trip-a-Treat</span>
                         </NavbarItem>
+
                     <Column isSize="1/4">
                         <NavbarItem className = "hidden-links" hasTextAlign='centered'>
-                            <span className = "navbar-links">Hello,</span>
+                            <span className = "navbar-links">Welcome,</span>
                         </NavbarItem>
                     </Column>
                     <Column isSize="1/3">
                         <NavbarItem className = "hidden-links" hasTextAlign='centered'>
-                            <span className = "navbar-links">No Name</span>
+                            <span className = "navbar-links">User</span>
+
                         </NavbarItem>
                     </Column>
                     </Columns>
@@ -347,10 +358,10 @@ class Profile extends Component {
                     <NavbarMenu>
                         <NavbarEnd className = "profile-nav">
                             <NavbarItem>
-                                <span className = "navbar-links">Hello</span>
+                                <span className = "navbar-links">Welcome,</span>
                             </NavbarItem>
                             <NavbarItem>
-                                <span className = "navbar-links">No name</span>
+                                <span className = "navbar-links">User</span>
                             </NavbarItem>
                         </NavbarEnd>
                     </NavbarMenu>

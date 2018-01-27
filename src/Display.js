@@ -13,6 +13,7 @@ import logo from './logo.svg';
 import {firebaseApp} from './firebase';
 import axios from 'axios';
 import { Container } from 'bloomer/lib/layout/Container';
+import firebase from 'firebase';
 
 
 
@@ -32,8 +33,10 @@ class Display extends Component {
         }, {
             headers: {
                 'Content-Type': 'application/json',
-                'User-id': uid
+                'Email': firebase.auth().currentUser.email
             }
+        }).then(response => {
+            console.log(response);
         });
     }
 
