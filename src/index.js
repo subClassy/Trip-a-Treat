@@ -14,7 +14,7 @@ firebaseApp.auth().onAuthStateChanged(user => {
         hashHistory.push('/profile');
     }
     else {
-        hashHistory.replace('/app');
+        hashHistory.replace('/profile');
     }
 })
 
