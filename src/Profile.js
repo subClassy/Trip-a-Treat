@@ -17,6 +17,13 @@ import moment from 'moment';
 import PlacesAutocomplete from 'react-places-autocomplete'
 import { geocodeByAddress,  getLatLng } from 'react-places-autocomplete'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import { Dropdown } from 'bloomer/lib/components/Dropdown/Dropdown';
+import { DropdownTrigger } from 'bloomer/lib/components/Dropdown/DropdownTrigger';
+import { Icon } from 'bloomer/lib/elements/Icon';
+import { DropdownMenu } from 'bloomer/lib/components/Dropdown/Menu/DropdownMenu';
+import { DropdownContent } from 'bloomer/lib/components/Dropdown/Menu/DropdownContent';
+import { DropdownItem } from 'bloomer/lib/components/Dropdown/Menu/DropdownItem';
+import { Button } from 'bloomer/lib/elements/Button';
 
 class Profile extends Component {
     constructor(props) {
@@ -25,6 +32,8 @@ class Profile extends Component {
             date: moment(),
             formattedDate: '',
             place: '',
+            latlngOrigin: null,
+            latlngDest: null,
         }
         this.handleDate = this.handleDate.bind(this);
         this.onChange = (place) => this.setState({ place })
@@ -155,6 +164,37 @@ class Profile extends Component {
                                 inputProps={inputProps} 
                                 onEnterKeyDown={handleEnter}
                             />
+                    </Column>
+                </Columns>
+                <Columns>
+                    <Column isSize = {{desktop: 6, tablet: 8, mobile: 10}} isOffset = {{desktop: 3, tablet: 2, mobile: 1}}>
+                        <p className = "profile-labels"> Where do you plan to end your journey : </p> <PlacesAutocomplete 
+                                placeholder = 'Enter Location'
+                                styles={myStyles}
+                                inputProps={inputProps} 
+                                onEnterKeyDown={handleEnter}
+                            />
+                    </Column>
+                </Columns>
+                <Columns>
+                    <Column isSize = {{desktop: 6, tablet: 8, mobile: 10}} isOffset = {{desktop: 3, tablet: 2, mobile: 1}}>
+                        <p className = "profile-labels">When do you plan to leave tentatively :</p>
+                        <Dropdown>
+                            <DropdownTrigger>
+                                <Button aria-haspopup = "true" aria-controls = "dropdown-menu">
+                                <span> Choose one </span>
+                                <Icon icon = "angle-down" isSize = "small" />
+                                </Button>
+                            </DropdownTrigger>
+                            <DropdownMenu>
+                                <DropdownContent>
+                                    <DropdownItem>Morning</DropdownItem>
+                                    <DropdownItem>Afternoon</DropdownItem>
+                                    <DropdownItem>Evening</DropdownItem>
+                                    <DropdownItem>Night</DropdownItem>
+                                </DropdownContent>
+                            </DropdownMenu>
+                        </Dropdown>
                     </Column>
                 </Columns>
                 </div>
