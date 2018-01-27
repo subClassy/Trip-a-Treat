@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import hamburgerLogo from './burgerIcon.svg';
 import {firebaseApp} from './firebase';
-import * as firebase from 'firebase';
 import './App.css';
 import { Navbar } from 'bloomer/lib/components/Navbar/Navbar';
 import { NavbarBrand } from 'bloomer/lib/components/Navbar/NavbarBrand';
@@ -17,13 +15,9 @@ import moment from 'moment';
 import PlacesAutocomplete from 'react-places-autocomplete'
 import { geocodeByAddress,  getLatLng } from 'react-places-autocomplete'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-import { Dropdown } from 'bloomer/lib/components/Dropdown/Dropdown';
-import { DropdownTrigger } from 'bloomer/lib/components/Dropdown/DropdownTrigger';
-import { Icon } from 'bloomer/lib/elements/Icon';
-import { DropdownMenu } from 'bloomer/lib/components/Dropdown/Menu/DropdownMenu';
-import { DropdownContent } from 'bloomer/lib/components/Dropdown/Menu/DropdownContent';
-import { DropdownItem } from 'bloomer/lib/components/Dropdown/Menu/DropdownItem';
-import { Button } from 'bloomer/lib/elements/Button';
+import { Field } from 'bloomer/lib/elements/Form/Field/Field';
+import { Control } from 'bloomer/lib/elements/Form/Control';
+import { Select } from 'bloomer/lib/elements/Form/Select';
 
 class Profile extends Component {
     constructor(props) {
@@ -34,13 +28,32 @@ class Profile extends Component {
             place: '',
             latlngOrigin: null,
             latlngDest: null,
+            time: 'morning',
+            priority: '',
         }
         this.handleDate = this.handleDate.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         this.onChange = (place) => this.setState({ place })
     }
 
     signOut() {
         firebaseApp.auth().signOut();
+    }
+
+    handleSelect(e) {
+        e.preventDefault();
+        const element = e.target.value;
+        this.setState({
+            time: element
+        })
+    }
+
+    handleSelectPriorities(e) {
+        e.preventDefault();
+        const element = e.target.value;
+        this.setState({
+            priority: element
+        })
     }
 
     handleDate(pickedDate) {
@@ -51,12 +64,12 @@ class Profile extends Component {
             var moment = this.state.date._d;
             var date = moment.getDate();
             date = date.toString();
-            if (date.length == 1) {
+            if (date.length === 1) {
                 date = "0" + date;
             }
             var month = moment.getMonth() + 1;
             month = month.toString();
-            if (month.length == 1) {
+            if (month.length === 1) {
                 month = "0" + month;
             }
             var year = moment.getFullYear();
@@ -179,22 +192,30 @@ class Profile extends Component {
                 <Columns>
                     <Column isSize = {{desktop: 6, tablet: 8, mobile: 10}} isOffset = {{desktop: 3, tablet: 2, mobile: 1}}>
                         <p className = "profile-labels">When do you plan to leave tentatively :</p>
-                        <Dropdown>
-                            <DropdownTrigger>
-                                <Button aria-haspopup = "true" aria-controls = "dropdown-menu">
-                                <span> Choose one </span>
-                                <Icon icon = "angle-down" isSize = "small" />
-                                </Button>
-                            </DropdownTrigger>
-                            <DropdownMenu>
-                                <DropdownContent>
-                                    <DropdownItem>Morning</DropdownItem>
-                                    <DropdownItem>Afternoon</DropdownItem>
-                                    <DropdownItem>Evening</DropdownItem>
-                                    <DropdownItem>Night</DropdownItem>
-                                </DropdownContent>
-                            </DropdownMenu>
-                        </Dropdown>
+                        <Field>
+                            <Control>
+                                <Select onChange = {this.handleSelect}>
+                                    <option >Morning</option>
+                                    <option >Afternoon</option>
+                                    <option >Evening</option>
+                                    <option >Late Night</option>
+                                </Select>
+                            </Control>
+                        </Field>
+                    </Column>
+                </Columns>
+                <Columns>
+                    <Column isSize = {{desktop: 6, tablet: 8, mobile: 10}} isOffset = {{desktop: 3, tablet: 2, mobile: 1}}>
+                        <p className = "profile-labels">Some priorities :</p>
+                        <Field>
+                            <Control>
+                                <Select onChange = {this.handleSelectPriorities}>
+                                    <option >None</option>
+                                    <option >Avoid Highways</option>
+                                    <option >Avoid Tolls</option>
+                                </Select>
+                            </Control>
+                        </Field>
                     </Column>
                 </Columns>
                 </div>
