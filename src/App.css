@@ -8,6 +8,13 @@
   background: linear-gradient(to bottom, #070020, #080a27);
 }
 
+html, body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background: linear-gradient(to bottom, #070020, #080a27);
+}
+
 .navbar-logo {
   margin-right: 5px;
   width: 200px;

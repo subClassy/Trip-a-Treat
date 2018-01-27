@@ -322,15 +322,21 @@ class Profile extends Component {
                 <div id = "page-wrap">
                 <Navbar className = "navbar">
                     <NavbarBrand>
-                        <NavbarItem>
-                            <img src={logo} className = "navbar-logo" /> <span className = "logo-name">Trip-a-Treat</span>
+                    <Columns isCentered>
+                        <NavbarItem style={{marginLeft:10+ 'em'}}>
+                            <img src={logo} className = "navbar-logo"/><span className = "logo-name">Trip-a-Treat</span>
                         </NavbarItem>
+                    <Column isSize="1/4">
                         <NavbarItem className = "hidden-links">
-                            <span className = "navbar-links">Hello, </span>
+                            <span className = "navbar-links" hasTextAlign='centered'>Hello, </span>
                         </NavbarItem>
+                    </Column>
+                    <Column isSize="1/3">
                         <NavbarItem className = "hidden-links">
-                            <span className = "navbar-links">No Name</span>
+                            <span className = "navbar-links" hasTextAlign='centered'>No Name</span>
                         </NavbarItem>
+                    </Column>
+                    </Columns>
                     </NavbarBrand>
                     <NavbarMenu>
                         <NavbarEnd className = "profile-nav">
@@ -390,7 +396,7 @@ class Profile extends Component {
                             </Control>
                         </Field>
                     </Column>
-                    <Column isSize = {{desktop: 3, tablet: 4, mobile:5}} >
+                    <Column isSize = {{desktop: 3, tablet: 4, mobile:5}} isOffset = {{desktop: 1, tablet: 2, mobile: 1}}>
                         <p className = "profile-labels">Some priorities :</p>
                         <Field>
                             <Control>
@@ -404,7 +410,7 @@ class Profile extends Component {
                     </Column>
                 </Columns>
                 <Columns>
-                    <Column isSize = {{default: 2}} isOffset = {{default: 5}}>
+                    <Column isSize = {{desktop: 3, tablet: 4, mobile:5}} isOffset = {{desktop: 1, tablet: 2, mobile: 1}}>
                         <Button className = "profile-submit" onClick = {this.submitForm}>Submit</Button>
                     </Column>
                 </Columns>
