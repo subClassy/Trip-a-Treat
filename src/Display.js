@@ -10,9 +10,31 @@ import { NavbarMenu } from 'bloomer/lib/components/Navbar/NavbarMenu';
 import { NavbarEnd } from 'bloomer/lib/components/Navbar/NavbarEnd';
 import './App.css';
 import logo from './logo.svg';
+import {firebaseApp} from './firebase';
+import axios from 'axios';
 
 
 class Display extends Component {
+
+    signOut() {
+        firebaseApp.auth().signOut();
+    }
+
+    handleSave() {
+        var text = prompt('Do you want it to be shareable(true/false) ?');
+        var uid = localStorage.getItem('userId');
+        var data = JSON.parse(localStorage.getItem('data'));
+        data.isSearchable = text;
+        axios.post('https://a62c40c4.ngrok.io/save-trip', {
+            data
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'User-id': uid
+            }
+        });
+    }
+
     render(){
         const json = JSON.parse(localStorage.getItem('data'));
         console.log(json);
@@ -69,7 +91,7 @@ class Display extends Component {
             <div id = "outer-container">
                 <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } width = {'400px'} right>
                         <a className = "hm-list">View your saved trips</a>
-                        <a className = "hm-list">Post a ride at Bla Bla Car</a>
+                        <a className = "hm-list" onClick = {this.handleSave}>Save Trip</a>
                         <a className = "hm-list hm-logout" onClick = {() => this.signOut()}  >Logout</a>
                 </Menu>
                 <div id = "page-wrap">
@@ -126,7 +148,7 @@ class Display extends Component {
                 </Columns>
                 <Columns>
                     <Column isSize = {{default: 8}} isOffset = {{default: 2}}>
-                        <p className = "profile-labels">Expected weather should be *sunny*.</p>
+                        <p className = "profile-labels">Expected weather should be {json.data[0].weather}.</p>
                     </Column>
                 </Columns>
                 <Columns>
