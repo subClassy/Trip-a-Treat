@@ -99,6 +99,7 @@
 }
 
 .email-input, .password-input{
+  color: #ffffff;
   outline: none;
   font-size: 25px;
   margin: auto;

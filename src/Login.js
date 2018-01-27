@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import {Link} from 'react-router';
 import './bootstrap-social.css';
+import { firebaseApp, auth, providerGoogle, providerFacebook } from './firebase';
+import * as firebase from 'firebase';
 import { Columns } from 'bloomer/lib/grid/Columns';
 import { Column } from 'bloomer/lib/grid/Column';
 import { Box } from 'bloomer/lib/elements/Box';
@@ -14,8 +16,73 @@ class Login extends Component {
         this.state = {
             isLogin: true,
             loginStyle: '1px solid #2EBD6B',
-            signupStyle: '1px solid none'
+            signupStyle: '1px solid none',
+            emailSignUp: '',
+            passwordSignUp: '',
+            nameSignup: '',
+            passwordSignIn: '',
+            emailSignIn: ''
         }
+    }
+
+    handleGoogleLogin() {
+        auth.signInWithPopup(providerGoogle) 
+            .then((result) => {
+                const user = result.user;
+                this.setState({
+                    user
+            });
+            firebase.database().ref('users/' + user.uid).set({
+            username: user.displayName,   
+        });
+    })
+        .catch(error => {
+            console.log(error);
+            alert(error.message);
+        })
+    }
+
+    handleFacebookLogin() {
+        auth.signInWithPopup(providerFacebook) 
+            .then((result) => {
+                const user = result.user;
+                this.setState({
+                    user
+            });
+            firebase.database().ref('users/' + user.uid).set({
+            username: user.displayName,   
+        });
+    })
+    .catch(error => {
+        console.log(error);
+        alert(error.message);
+        })
+    }
+
+    signUp() {
+        const {emailSignUp, passwordSignUp,nameSignup} = this.state;
+        console.log("helo");
+        firebaseApp.auth().createUserWithEmailAndPassword(emailSignUp, passwordSignUp)
+            .then(() => {
+                var user = firebaseApp.auth().currentUser;
+                 firebase.database().ref('users/' + user.uid).set({
+                    username: nameSignup,
+                 });
+            })
+            .catch(error => {
+                console.log(error);
+                alert(error.message);
+            }) 
+    }
+
+    signIn() {
+        const {emailSignIn, passwordSignIn} = this.state;
+            firebaseApp.auth().signInWithEmailAndPassword(emailSignIn, passwordSignIn)
+                .catch(error => {
+                    console.log(error);
+                    alert(error.message);
+                    this.setState({error});
+        }) 
     }
 
     handleLoginClick() {
@@ -56,20 +123,30 @@ class Login extends Component {
                             {
                                 (this.state.isLogin === true) ?
                                     <div className = "form-group">
-                                        <Label className = "label">Username</Label>
+                                        <Label className = "label">Email</Label>
                                         <input
                                             className = "form-control email-input"
                                             type = "text"
+                                            onChange = {
+                                                event => this.setState({
+                                                            emailSignIn: event.target.value
+                                                }) 
+                                            }
                                         />
                                         <Label className = "label">Password</Label>
                                         <input
                                             className = "form-control password-input"
                                             type = "password"
+                                            onChange = {
+                                                event => this.setState({
+                                                            passwordSignIn: event.target.value
+                                                }) 
+                                            }
                                         />
                                         <button
                                             className = "btn signin-btn"
                                             type = "button"
-                                            // onClick = {() => this.signIn()}
+                                            onClick = {() => this.signIn()}
                                         >
                                             Login
                                         </button>
@@ -100,21 +177,38 @@ class Login extends Component {
                                         <input
                                             className = "form-control email-input"
                                             type = "text"
+                                            onChange = {
+                                                event => this.setState({
+                                                            emailSignUp: event.target.value
+                                                }) 
+                                            }
                                         />
                                         <Label className = "label">Username</Label>
                                         <input
                                             className = "form-control email-input"
                                             type = "text"
+                                            onChange = {
+                                                event => 
+                                                    this.setState({
+                                                        nameSignup: event.target.value
+                                                }) 
+                                            }
                                         />
                                         <Label className = "label">Password</Label>
                                         <input
                                             className = "form-control password-input"
                                             type = "password"
+                                            onChange = {
+                                                event => 
+                                                    this.setState({
+                                                        passwordSignUp: event.target.value
+                                                }) 
+                                            }
                                         />
                                         <button
                                             className = "btn signin-btn"
                                             type = "button"
-                                            // onClick = {() => this.signIn()}
+                                            onClick = {() => this.signUp()}
                                         >
                                             SignUp
                                         </button>
