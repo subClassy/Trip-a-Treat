@@ -139,7 +139,7 @@ class Profile extends Component {
                             }
                             console.log(data);
                     
-                            axios.post('https://3642189c.ngrok.io/trips', {
+                            axios.post('https://a62c40c4.ngrok.io/trips', {
                                 data: data
                               }, {headers: {
                                   'Content-Type': 'application/json'
@@ -178,7 +178,7 @@ class Profile extends Component {
                     }
                     console.log(data);
             
-                    axios.post('https://3642189c.ngrok.io/trips', {
+                    axios.post('https://a62c40c4.ngrok.io/trips', {
                         data: data
                       }, {headers: {
                           'Content-Type': 'application/json'
