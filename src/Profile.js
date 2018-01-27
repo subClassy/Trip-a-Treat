@@ -20,6 +20,8 @@ import { Control } from 'bloomer/lib/elements/Form/Control';
 import { Select } from 'bloomer/lib/elements/Form/Select';
 import { Button } from 'bloomer/lib/elements/Button';
 import axios from 'axios';
+import { Link } from 'react-router';
+import {hashHistory} from 'react-router';
 
 class Profile extends Component {
     constructor(props) {
@@ -137,13 +139,18 @@ class Profile extends Component {
                             }
                             console.log(data);
                     
-                            axios.post('https://6db5e2b4.ngrok.io/trips', {
+                            axios.post('https://3642189c.ngrok.io/trips', {
                                 data: data
                               }, {headers: {
                                   'Content-Type': 'application/json'
                               }})
                               .then(function (response) {
                                 console.log(response);
+                                localStorage.setItem('data', JSON.stringify(response));
+                              })
+                              .then(() => {
+                                  hashHistory.push('/display');
+                                //   this.props.history.push('/display');
                               })
                               .catch(function (error) {
                                 console.log(error);
@@ -171,13 +178,18 @@ class Profile extends Component {
                     }
                     console.log(data);
             
-                    axios.post('https://6db5e2b4.ngrok.io/trips', {
+                    axios.post('https://3642189c.ngrok.io/trips', {
                         data: data
                       }, {headers: {
                           'Content-Type': 'application/json'
                       }})
                       .then(function (response) {
                         console.log(response);
+                        localStorage.setItem('data', JSON.stringify(response));
+                      })
+                      .then(() => {
+                        //   this.props.history.push('/display');
+                          hashHistory.push('/display');
                       })
                       .catch(function (error) {
                         console.log(error);
