@@ -316,7 +316,6 @@ class Profile extends Component {
             <div id = "outer-container">
                 <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } width = {'400px'} right>
                         <a className = "hm-list">View your saved trips</a>
-                        <a className = "hm-list">Post a ride at Bla Bla Car</a>
                         <a className = "hm-list hm-logout" onClick = {() => this.signOut()}  >Logout</a>
                 </Menu>
                 <div id = "page-wrap">

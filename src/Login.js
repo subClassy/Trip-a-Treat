@@ -9,6 +9,7 @@ import { Columns } from 'bloomer/lib/grid/Columns';
 import { Column } from 'bloomer/lib/grid/Column';
 import { Box } from 'bloomer/lib/elements/Box';
 import { Label } from 'bloomer/lib/elements/Form/Label';
+import axios from 'axios';
 
 class Login extends Component {
     constructor(props) {
@@ -29,6 +30,13 @@ class Login extends Component {
         auth.signInWithPopup(providerGoogle) 
             .then((result) => {
                 const user = result.user;
+                const  email = user.email;
+                axios.post("https://a62c40c4.ngrok.io/login", {
+                    "viaOauth": true,
+                    "email": email
+                }).then(response => {
+                    localStorage.setItem('userId', response.userId)
+                })
                 this.setState({
                     user
             });
@@ -46,6 +54,13 @@ class Login extends Component {
         auth.signInWithPopup(providerFacebook) 
             .then((result) => {
                 const user = result.user;
+                const email = user.email;
+                axios.post("https://a62c40c4.ngrok.io/login", {
+                    "viaOauth": true,
+                    "email": email
+                }).then(response => {
+                    localStorage.setItem('userId', response.userId)
+                })
                 this.setState({
                     user
             });
