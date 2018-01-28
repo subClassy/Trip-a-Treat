@@ -18,22 +18,151 @@ import firebase from 'firebase';
 
 
 class Display extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            restaurants : null,
+            doctors: null,
+            gasStation: null,
+            atm: null,
+        }
+        this.isValid = this.isValid.bind(this);
+    }
+ 
+    isValid() {
+        if(this.state.restaurants !== null) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
 
     signOut() {
         firebaseApp.auth().signOut();
     }
 
+    componentDidMount() {
+        var data = (JSON.parse(localStorage.getItem('data'))).data[0];
+        var start_address = data.legs[0].start_address;
+        var end_address = data.legs[0].end_address;
+        axios.post('http://a62c40c4.ngrok.io/poi', {
+            source: start_address,
+            destination: end_address,
+            type: 'restaurant',
+        }).then(response => {
+            this.setState({
+                restaurants: response
+            })
+            console.log(response);
+            let box = document.getElementById("restaurant");
+            for (let j = 0; j < 1; j++) {
+                let element = response.data[j];
+                console.log("went");
+                    for (let i = 0; i < element.results.length; i++) {
+                        var para = document.createElement("P");                        
+                        var t = document.createTextNode(element.results[i].name);
+                        if (t !== null) {
+                            para.appendChild(t);
+                            if (para !== null) {
+                                box.appendChild(para);
+                            }
+                        }
+                    }
+                    
+                
+            }
+        })
+        axios.post('https://a62c40c4.ngrok.io/poi', {
+            source: start_address,
+            destination: end_address,
+            type: 'hospital',
+        }).then(response => {
+            this.setState({
+                doctors: response
+            })
+            let box = document.getElementById("hospitals");
+            for (let j = 0; j < 1; j++) {
+                let element = response.data[j];
+                console.log("went");
+                    for (let i = 0; i < element.results.length; i++) {
+                        var para = document.createElement("P");                        
+                        var t = document.createTextNode(element.results[i].name);
+                        if (t !== null) {
+                            para.appendChild(t);
+                            if (para !== null) {
+                                box.appendChild(para);
+                            }
+                        }
+                    }
+                    
+                
+            }
+        })
+        axios.post('https://a62c40c4.ngrok.io/poi', {
+            source: start_address,
+            destination: end_address,
+            type: 'gas_station',
+        }).then(response => {
+            this.setState({
+                gasStation: response
+            })
+            let box = document.getElementById("gas-stations");
+            for (let j = 0; j < 1; j++) {
+                let element = response.data[j];
+                console.log("went");
+                    for (let i = 0; i < element.results.length; i++) {
+                        var para = document.createElement("P");                        
+                        var t = document.createTextNode(element.results[i].name);
+                        if (t !== null) {
+                            para.appendChild(t);
+                            if (para !== null) {
+                                box.appendChild(para);
+                            }
+                        }
+                    }
+                    
+                
+            }
+        })
+        axios.post('https://a62c40c4.ngrok.io/poi', {
+            source: start_address,
+            destination: end_address,
+            type: 'atm',
+        }).then(response => {
+            this.setState({
+                atm: response
+            })
+            let box = document.getElementById("atm");
+            for (let j = 0; j < 1; j++) {
+                let element = response.data[j];
+                console.log("went");
+                    for (let i = 0; i < element.results.length; i++) {
+                        var para = document.createElement("P");                        
+                        var t = document.createTextNode(element.results[i].name);
+                        if (t !== null) {
+                            para.appendChild(t);
+                            if (para !== null) {
+                                box.appendChild(para);
+                            }
+                        }
+                    }
+                    
+                
+            }
+        })
+    }
+
     handleSave() {
         var text = prompt('Do you want it to be shareable(true/false) ?');
         var uid = localStorage.getItem('userId');
-        var data = JSON.parse(localStorage.getItem('data'));
+        var data = (JSON.parse(localStorage.getItem('data'))).data[0];
         data.isSearchable = text;
         axios.post('https://a62c40c4.ngrok.io/save-trip', {
-            data
+            json : data
         }, {
             headers: {
                 'Content-Type': 'application/json',
-                'Email': firebase.auth().currentUser.email
             }
         }).then(response => {
             console.log(response);
@@ -97,6 +226,7 @@ class Display extends Component {
                 <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } width = {'400px'} right>
                         <a className = "hm-list">View your saved trips</a>
                         <a className = "hm-list" onClick = {this.handleSave}>Save Trip</a>
+                        <a className = "hm-list" >View Restaurants on the route</a>
                         <a className = "hm-list hm-logout" onClick = {() => this.signOut()}  >Logout</a>
                 </Menu>
                 <div id = "page-wrap">
@@ -166,6 +296,29 @@ class Display extends Component {
                     </Column>
                 </Columns>
                 </Container>
+                {/* ({this.isValid()}) ?
+                <div>
+                    {
+                        this.state.restaurants.data.map((currentrest, k) => {
+                            return (
+                                <div>
+                                    {
+                                        (currentrest.status !== "ZERO_RESULTS") ? currentrest.results.map((currrest, k) => {
+                                            return ( <p>{currrest.name}</p>)
+                                        }) : <p></p>
+                                    }
+                                </div>
+                            )
+                        })
+                    }
+                </div> : <div></div> */}
+                <div id="restaurant" className="profile-labels"  style={{marginLeft:5+ 'em'}}><p className = "headers-poi">Restaurants</p></div>
+                <hr/>
+                <div id="atm" className="profile-labels"  style={{marginLeft:5+ 'em'}}><p className = "headers-poi">ATM</p></div>
+                <hr/>
+                <div id="hospitals" className="profile-labels"  style={{marginLeft:5+ 'em'}}><p className = "headers-poi">Hospitals</p></div>
+                <hr/>
+                <div id="gas-stations" className="profile-labels"  style={{marginLeft:5+ 'em'}}><p className = "headers-poi">Gas Stations</p></div>
             </div>
             </div>
         )
