@@ -11,7 +11,7 @@ class Savedtrips extends Component {
 
     componentDidMount() {
         let self = this;
-        axios.get('http://a62c40c4.ngrok.io/get-trips', {
+        axios.get('http://d3ec937a.ngrok.io/get-trips', {
             headers: {
                 'Content-Type': 'application/json'
             }

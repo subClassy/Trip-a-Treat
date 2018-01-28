@@ -47,7 +47,7 @@ class Display extends Component {
         var data = (JSON.parse(localStorage.getItem('data'))).data[0];
         var start_address = data.legs[0].start_address;
         var end_address = data.legs[0].end_address;
-        axios.post('http://a62c40c4.ngrok.io/poi', {
+        axios.post('http://d3ec937a.ngrok.io/poi', {
             source: start_address,
             destination: end_address,
             type: 'restaurant',
@@ -74,7 +74,7 @@ class Display extends Component {
                 
             }
         })
-        axios.post('https://a62c40c4.ngrok.io/poi', {
+        axios.post('https://d3ec937a.ngrok.io/poi', {
             source: start_address,
             destination: end_address,
             type: 'hospital',
@@ -100,7 +100,7 @@ class Display extends Component {
                 
             }
         })
-        axios.post('https://a62c40c4.ngrok.io/poi', {
+        axios.post('https://d3ec937a.ngrok.io/poi', {
             source: start_address,
             destination: end_address,
             type: 'gas_station',
@@ -126,7 +126,7 @@ class Display extends Component {
                 
             }
         })
-        axios.post('https://a62c40c4.ngrok.io/poi', {
+        axios.post('https://d3ec937a.ngrok.io/poi', {
             source: start_address,
             destination: end_address,
             type: 'atm',
@@ -159,7 +159,7 @@ class Display extends Component {
         var uid = localStorage.getItem('userId');
         var data = (JSON.parse(localStorage.getItem('data'))).data[0];
         data.isSearchable = text;
-        axios.post('https://a62c40c4.ngrok.io/save-trip', {
+        axios.post('https://d3ec937a.ngrok.io/save-trip', {
             json : data
         }, {
             headers: {

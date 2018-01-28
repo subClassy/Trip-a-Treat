@@ -146,7 +146,7 @@ class Profile extends Component {
                             }
                             console.log(data);
                     
-                            axios.post('https://a62c40c4.ngrok.io/trips', {
+                            axios.post('https://d3ec937a.ngrok.io/trips', {
                                 data: data
                               }, {headers: {
                                   'Content-Type': 'application/json'
@@ -185,7 +185,7 @@ class Profile extends Component {
                     }
                     console.log(data);
             
-                    axios.post('https://a62c40c4.ngrok.io/trips', {
+                    axios.post('https://d3ec937a.ngrok.io/trips', {
                         data: data
                       }, {headers: {
                           'Content-Type': 'application/json'
@@ -343,21 +343,12 @@ class Profile extends Component {
                             <span className = "navbar-links">Welcome,</span>
                         </NavbarItem>
                     </Column>
-                    <Column isSize="1/3">
-                        <NavbarItem className = "hidden-links" hasTextAlign='centered'>
-                            <span className = "navbar-links">User</span>
-
-                        </NavbarItem>
-                    </Column>
                     </Columns>
                     </NavbarBrand>
                     <NavbarMenu>
                         <NavbarEnd className = "profile-nav">
                             <NavbarItem>
                                 <span className = "navbar-links">Welcome,</span>
-                            </NavbarItem>
-                            <NavbarItem>
-                                <span className = "navbar-links">User</span>
                             </NavbarItem>
                         </NavbarEnd>
                     </NavbarMenu>
