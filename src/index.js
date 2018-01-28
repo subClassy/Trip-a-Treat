@@ -8,6 +8,7 @@ import { firebaseApp } from './firebase';
 import App from './App';
 import Profile from './Profile';
 import Login from './Login';
+import Savedtrips from './Savedtrips'
 import Display from './Display';
 
 firebaseApp.auth().onAuthStateChanged(user => {
@@ -25,6 +26,7 @@ ReactDOM.render(
             <Route path = "/profile" component = {Profile} />
             <Route path = "/login" component = {Login} />
             <Route path = "/display" component = {Display} />
+            <Route path = "/savedtrips" component = {Savedtrips} />
     </Router>, document.getElementById('root')
 );
 registerServiceWorker();

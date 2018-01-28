@@ -14,6 +14,7 @@ import {firebaseApp} from './firebase';
 import axios from 'axios';
 import { Container } from 'bloomer/lib/layout/Container';
 import firebase from 'firebase';
+import {Link} from 'react-router';
 
 
 
@@ -224,9 +225,8 @@ class Display extends Component {
         return(
             <div id = "outer-container">
                 <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } width = {'400px'} right>
-                        <a className = "hm-list">View your saved trips</a>
+                       <Link to = {'/savedtrips'}><a className = "hm-list">View your saved trips</a></Link>
                         <a className = "hm-list" onClick = {this.handleSave}>Save Trip</a>
-                        <a className = "hm-list" >View Restaurants on the route</a>
                         <a className = "hm-list hm-logout" onClick = {() => this.signOut()}  >Logout</a>
                 </Menu>
                 <div id = "page-wrap">

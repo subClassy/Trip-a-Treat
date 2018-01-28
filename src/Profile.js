@@ -48,10 +48,6 @@ class Profile extends Component {
 
     }
 
-    componentDidMount() {
-        
-    }
-
     signOut() {
         firebaseApp.auth().signOut();
     }
@@ -330,7 +326,7 @@ class Profile extends Component {
         return (
             <div id = "outer-container">
                 <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } width = {'400px'} right>
-                        <a className = "hm-list">View your saved trips</a>
+                        <Link to={'/savedtrips'}><a className = "hm-list">View your saved trips</a></Link>
                         <a className = "hm-list hm-logout" onClick = {() => this.signOut()}  >Logout</a>
                 </Menu>
                 <div id = "page-wrap">
