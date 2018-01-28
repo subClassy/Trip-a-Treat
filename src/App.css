@@ -232,6 +232,12 @@ html, body{
   margin: 5px;
 }
 
+.headers-poi {
+  font-size: 30px;
+  color: #95989A;
+  font-weight: bold;
+}
+
 .profile-submit {
   color: #F1F1F1;
   background-color: #2EBD6B;
