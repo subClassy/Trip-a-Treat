@@ -362,7 +362,7 @@ class Profile extends Component {
                         </NavbarEnd>
                     </NavbarMenu>
                 </Navbar>
-                <Columns isCentered><Column isCentered><Image style={{marginLeft:44+ 'em'}} isSize="128x128" src="https://www.gvsu.edu/cms4/asset/2BD867CE-07AE-8DD2-1022D33D00143BB8/icon_emergency1.png" /></Column></Columns>
+                {/* <Columns isCentered><Column isCentered><Image style={{marginLeft:44+ 'em'}} isSize="128x128" src="https://www.gvsu.edu/cms4/asset/2BD867CE-07AE-8DD2-1022D33D00143BB8/icon_emergency1.png" /></Column></Columns> */}
                 <Columns>
                     <Column isSize = {{desktop: 6, tablet: 8, mobile: 10}} isOffset = {{desktop: 3, tablet: 2, mobile: 1}}>
                         <p className = "heading-profile">Lets plan your next trip</p>
