@@ -22,8 +22,8 @@ import { Button } from 'bloomer/lib/elements/Button';
 import axios from 'axios';
 import { Link } from 'react-router';
 import {hashHistory} from 'react-router';
-import { Image } from 'bloomer/lib/elements/Image';
-import firebase from 'firebase';
+// import { Image } from 'bloomer/lib/elements/Image';
+// import firebase from 'firebase';
 
 class Profile extends Component {
     constructor(props) {
@@ -335,7 +335,7 @@ class Profile extends Component {
                     <Columns isCentered>
                     
                         <NavbarItem style={{marginLeft:10+ 'em'}}>
-                            <img src={logo} className = "navbar-logo"/><span className = "logo-name">Trip-a-Treat</span>
+                            <img src={logo} alt = 'Logo' className = "navbar-logo"/><span className = "logo-name">Trip-a-Treat</span>
                         </NavbarItem>
 
                     <Column isSize="1/4">

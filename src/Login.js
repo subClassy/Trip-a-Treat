@@ -10,7 +10,7 @@ import { Column } from 'bloomer/lib/grid/Column';
 import { Box } from 'bloomer/lib/elements/Box';
 import { Label } from 'bloomer/lib/elements/Form/Label';
 import axios from 'axios';
-import { hashHistory } from 'react-router';
+// import { hashHistory } from 'react-router';
 
 class Login extends Component {
     constructor(props) {
@@ -55,7 +55,7 @@ class Login extends Component {
         auth.signInWithPopup(providerFacebook) 
             .then((result) => {
                 const user = result.user;
-                const email = user.email;
+                // const email = user.email;
                 console.log(firebase.auth().currentUser.email);
                 this.setState({
                     user
@@ -117,7 +117,7 @@ class Login extends Component {
             <div>
                 <Columns>
                     <Column isSize = {{desktop: 4, tablet: 4, mobile: 6}} isOffset = {{desktop: 4, tablet: 4, mobile:3}}>
-                        <Link to = {'/app'} ><img src={logo} className = "login-logo" /></Link>
+                        <Link to = {'/app'} ><img src={logo} alt= "Logo" className = "login-logo" /></Link>
                     </Column>
                 </Columns>
                 <Columns>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withScriptjs ,withGoogleMap ,GoogleMap, Marker, Polyline, pathCoordinates, lineSymbol } from "react-google-maps";
+import { withGoogleMap ,GoogleMap, Polyline, lineSymbol } from "react-google-maps";
 import { Navbar } from 'bloomer/lib/components/Navbar/Navbar';
 import { NavbarBrand } from 'bloomer/lib/components/Navbar/NavbarBrand';
 import { NavbarItem } from 'bloomer/lib/components/Navbar/NavbarItem';
@@ -13,7 +13,7 @@ import logo from './logo.svg';
 import {firebaseApp} from './firebase';
 import axios from 'axios';
 import { Container } from 'bloomer/lib/layout/Container';
-import firebase from 'firebase';
+// import firebase from 'firebase';
 import {Link} from 'react-router';
 
 
@@ -156,7 +156,7 @@ class Display extends Component {
 
     handleSave() {
         var text = prompt('Do you want it to be shareable(true/false) ?');
-        var uid = localStorage.getItem('userId');
+        // var uid = localStorage.getItem('userId');
         var data = (JSON.parse(localStorage.getItem('data'))).data[0];
         data.isSearchable = text;
         axios.post('https://d3ec937a.ngrok.io/save-trip', {
@@ -199,7 +199,7 @@ class Display extends Component {
             pathCoordinates.push(finalData[i].end_location);
         }
         pathCoordinates.push(json.data[0].legs[0].end_location);
-        const MyMapComponent = withScriptjs(withGoogleMap((props) =>
+        const MyMapComponent = withGoogleMap((props) =>
             <GoogleMap
                 defaultZoom={8}
                 defaultCenter={center}
@@ -221,11 +221,11 @@ class Display extends Component {
                     /> 
                 }
             </GoogleMap>
-        ))
+        )
         return(
             <div id = "outer-container">
                 <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } width = {'400px'} right>
-                       <Link to = {'/savedtrips'}><a className = "hm-list">View your saved trips</a></Link>
+                       <Link to = {'/savedtrips'}><span className = "hm-list">View your saved trips</span></Link>
                         <a className = "hm-list" onClick = {this.handleSave}>Save Trip</a>
                         <a className = "hm-list hm-logout" onClick = {() => this.signOut()}  >Logout</a>
                 </Menu>
@@ -233,7 +233,7 @@ class Display extends Component {
                 <Navbar className = "navbar">
                     <NavbarBrand>
                         <NavbarItem>
-                            <img src={logo} className = "navbar-logo" /> <span className = "logo-name">Trip-a-Treat</span>
+                            <img src={logo} alt = "Logo" className = "navbar-logo" /> <span className = "logo-name">Trip-a-Treat</span>
                         </NavbarItem>
                         <NavbarItem className = "hidden-links">
                             <span className = "navbar-links">Hello, </span>
@@ -254,7 +254,7 @@ class Display extends Component {
                     </NavbarMenu>
                 </Navbar>
                 <Columns style={{marginLeft:23+ 'em'}}>
-                <p className = "profile-labels" hasTextAlign='centered'>Your most optimum path is shown and You must depart at {time} on {json.data[0].date}.</p>
+                <p className = "profile-labels" style = {{textAlign: center}}>Your most optimum path is shown and You must depart at {time} on {json.data[0].date}.</p>
                 </Columns>
                 <Columns>
                     <Column isSize = {{default: 9}} isOffset = {{default: 3}}>
@@ -270,17 +270,16 @@ class Display extends Component {
                 <Container>
                 <Columns>
                     <Column>
-                    <p className = "profile-labels">Alternative Routes:
+                    <p className = "profile-labels">Alternative Routes:</p>
                     {json.data.map((currentRoute, k) => {
                         return (
-                            <div>
+                            <div key = {k}>
                             {
                                 (k !== 0) ? <p className = "profile-labels" style={{marginLeft:10+ 'em'}}>{k}) Via {json.data[k].summary}. Distance - {json.data[k].legs[0].distance.text}. Time - {json.data[k].legs[0].duration.text}</p> : <p></p>
                             }
                             </div>
                         )
                     })}
-                    </p>
                     </Column>
                 </Columns>
                 <Columns>

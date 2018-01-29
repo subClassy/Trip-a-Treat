@@ -5,8 +5,8 @@ import {Link} from 'react-router';
 import {Navbar} from 'bloomer';
 import { NavbarBrand } from 'bloomer/lib/components/Navbar/NavbarBrand';
 import { NavbarItem } from 'bloomer/lib/components/Navbar/NavbarItem';
-import { NavbarMenu } from 'bloomer/lib/components/Navbar/NavbarMenu';
-import { NavbarEnd } from 'bloomer/lib/components/Navbar/NavbarEnd';
+// import { NavbarMenu } from 'bloomer/lib/components/Navbar/NavbarMenu';
+// import { NavbarEnd } from 'bloomer/lib/components/Navbar/NavbarEnd';
 import { Columns } from 'bloomer/lib/grid/Columns';
 import { Column } from 'bloomer/lib/grid/Column';
 import { Button } from 'bloomer/lib/elements/Button';
@@ -19,7 +19,7 @@ class App extends Component {
         <Columns isCentered>
           <NavbarBrand>
             <NavbarItem style={{marginLeft:10+ 'em'}}>
-              <img src={logo} className = "navbar-logo" /> <span className = "logo-name">Trip-a-Treat</span>
+              <img src={logo} alt = "Logo" className = "navbar-logo" /> <span className = "logo-name">Trip-a-Treat</span>
             </NavbarItem>
             </NavbarBrand>
         </Columns>
